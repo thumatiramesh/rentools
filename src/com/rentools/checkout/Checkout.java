@@ -57,7 +57,7 @@ public class Checkout {
         for (int i = 0; i < rentalDays; i++) {
             int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
             boolean isWeekend = (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY);
-            boolean isHoliday = isIndependenceDay(calendar) || isLaborDay(calendar);
+            boolean isHoliday = DateUtils.isIndependenceDay(calendar) || DateUtils.isLaborDay(calendar);
 
             if ((dayOfWeek == Calendar.SATURDAY && tool.isWeekendCharge()) ||
                     (dayOfWeek == Calendar.SUNDAY && tool.isWeekendCharge()) ||
@@ -69,16 +69,5 @@ public class Checkout {
         }
 
         return chargeDays;
-    }
-
-    private boolean isIndependenceDay(Calendar calendar) {
-        return calendar.get(Calendar.MONTH) == Calendar.JULY &&
-                calendar.get(Calendar.DAY_OF_MONTH) == 4;
-    }
-
-    private boolean isLaborDay(Calendar calendar) {
-        return calendar.get(Calendar.MONTH) == Calendar.SEPTEMBER &&
-                calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY &&
-                calendar.get(Calendar.DAY_OF_MONTH) <= 7; // First Monday in September
     }
 }
